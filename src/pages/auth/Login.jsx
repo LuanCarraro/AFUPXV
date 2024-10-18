@@ -1,32 +1,31 @@
-import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from '../../services/firebaseConfig';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { AuthEmailPasswordContext } from '../../context/authEmailPassword';
+import { Navigate } from 'react-router-dom';
 
 export default function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
-    const auth = getAuth(app);
+    const { email, setEmail, password, setPassword, SignInEmailPassword, Signed } = useContext(AuthEmailPasswordContext);
+    const [error, setError] = useState(null); // Para capturar erros de login
 
-    const SignUpEmailPassword = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                navigate('/dashboard');
+        SignInEmailPassword()
+            .then(() => {
             })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+            .catch((err) => {
+                setError("Erro ao fazer login. Verifique suas credenciais.");
             });
+    };
+
+    if (Signed) {
+        return <Navigate to="/" />;
     }
 
     return (
         <div className="container mt-5">
             <div className="card bg-dark text-white p-4">
                 <h2 className="text-center">Login</h2>
-                <form onSubmit={SignUpEmailPassword}>
+                {error && <div className="alert alert-danger">{error}</div>} { }
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="email">Email:</label>
                         <input
@@ -49,7 +48,7 @@ export default function Login() {
                             required
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary mt-4 w-100">Registrar</button>
+                    <button type="submit" className="btn btn-primary mt-4 w-100">Entrar</button>
                 </form>
             </div>
         </div>
