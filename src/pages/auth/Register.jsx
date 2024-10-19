@@ -1,34 +1,20 @@
-import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { app } from '../../services/firebaseConfig';
-import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthEmailPasswordContext } from '../../context/authEmailPassword';
+import { Navigate } from 'react-router-dom';
 
 export default function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
-    const auth = getAuth(app);
 
-    const SignInEmailPassword = (event) => {
-        event.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log('Usuário registrado:', user);
-                navigate('/dashboard');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(`Erro [${errorCode}]: ${errorMessage}`);
-            });
+    const { user, setEmail, email, setPassword, password, SignUpEmailPassword } = useContext(AuthEmailPasswordContext);
+
+    if (user) {
+        return <Navigate to={"/home"} />
     }
 
     return (
         <div className="container mt-5">
             <div className="card bg-dark text-white p-4">
                 <h2 className="text-center">Login</h2>
-                <form onSubmit={SignInEmailPassword}>
+                <form onSubmit={SignUpEmailPassword}>
                     <div className="form-group">
                         <label htmlFor="email">Email:</label>
                         <input

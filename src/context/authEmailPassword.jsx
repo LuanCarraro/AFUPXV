@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from 'react';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { app } from '../services/firebaseConfig';
 
 export const AuthEmailPasswordContext = createContext({});
@@ -35,8 +35,34 @@ export const AuthEmailPasswordProvider = ({ children }) => {
             });
     };
 
+    async function SignUpEmailPassword(event) {
+        event.preventDefault();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error(`Erro [${errorCode}]: ${errorMessage}`);
+            });
+    }
+
+    function handleSignOut() {
+        signOut(auth)
+            .then(() => {
+                setUser(null); // Remove o usuário do estado
+                sessionStorage.removeItem("@AuthFirebase:user"); // Remove da sessionStorage
+            })
+            .catch((error) => {
+                console.error("Erro ao deslogar:", error);
+            });
+    }
     return (
-        <AuthEmailPasswordContext.Provider value={{ email, setEmail, password, setPassword, SignInEmailPassword, Signed: !!user }}>
+        <AuthEmailPasswordContext.Provider value={{
+            email, setEmail, password, setPassword,
+            SignInEmailPassword, SignUpEmailPassword, Signed: !!user, user, handleSignOut
+        }}>
             {children}
         </AuthEmailPasswordContext.Provider>
     );
