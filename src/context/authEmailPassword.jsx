@@ -40,6 +40,8 @@ export const AuthEmailPasswordProvider = ({ children }) => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                setUser(user);
+                sessionStorage.setItem("@AuthFirebase:user", JSON.stringify(user));
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -51,8 +53,8 @@ export const AuthEmailPasswordProvider = ({ children }) => {
     function handleSignOut() {
         signOut(auth)
             .then(() => {
-                setUser(null); // Remove o usuário do estado
-                sessionStorage.removeItem("@AuthFirebase:user"); // Remove da sessionStorage
+                setUser(null);
+                sessionStorage.removeItem("@AuthFirebase:user");
             })
             .catch((error) => {
                 console.error("Erro ao deslogar:", error);
@@ -61,7 +63,8 @@ export const AuthEmailPasswordProvider = ({ children }) => {
     return (
         <AuthEmailPasswordContext.Provider value={{
             email, setEmail, password, setPassword,
-            SignInEmailPassword, SignUpEmailPassword, Signed: !!user, user, handleSignOut
+            SignInEmailPassword, SignUpEmailPassword, Signed: !!user,
+            user, handleSignOut
         }}>
             {children}
         </AuthEmailPasswordContext.Provider>

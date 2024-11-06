@@ -33,73 +33,75 @@ export default function AuthComponent() {
     }
 
     return (
-        <div className="container" id="container">
-            <div className="form-container sign-up">
-                <form onSubmit={SignUpEmailPassword}>
-                    <h1 style={{ color: '#512da8' }}>Criar Conta</h1>
-                    <div className="social-icons">
-                        <a href="#" className="icon"><i className="bi bi-google" style={{ color: '#512da8' }}></i></a>
-                        <a href="#" className="icon"><i className="bi bi-facebook" style={{ color: '#512da8' }}></i></a>
-                        <a href="#" className="icon"><i className="bi bi-github" style={{ color: '#512da8' }}></i></a>
-                        <a href="#" className="icon"><i className="bi bi-linkedin" style={{ color: '#512da8' }}></i></a>
-                    </div>
-                    <span>ou use seu email para registrar</span>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Senha"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    <button type="submit">Registrar</button>
-                </form>
-            </div>
-            <div className="form-container sign-in">
-                <form onSubmit={SignInEmailPassword}>
-                    <h1 style={{ color: '#512da8' }}>Entrar</h1>
-                    <div className="social-icons">
-                        <a href="#" className="icon"><i className="bi bi-google" style={{ color: '#512da8' }}></i></a>
-                        <a href="#" className="icon"><i className="bi bi-facebook" style={{ color: '#512da8' }}></i></a>
-                        <a href="#" className="icon"><i className="bi bi-github" style={{ color: '#512da8' }}></i></a>
-                        <a href="#" className="icon"><i className="bi bi-linkedin" style={{ color: '#512da8' }}></i></a>
-                    </div>
-                    <span>ou use seu email e senha</span>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Senha"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    <a href="#">Esqueceu sua senha?</a>
-                    <button type="submit">Entrar</button>
-                </form>
-            </div>
-            <div className="toggle-container">
-                <div className="toggle">
-                    <div className="toggle-panel toggle-left">
-                        <h1>Bem-vindo de volta!</h1>
-                        <p>Entre com seus dados pessoais para usar todas as funcionalidades do site</p>
-                        <button className="hidden" id="login">Entrar</button>
-                    </div>
-                    <div className="toggle-panel toggle-right">
-                        <h1>Olá, Amigo!</h1>
-                        <p>Registre-se com seus dados pessoais para usar todas as funcionalidades do site</p>
-                        <button className="hidden" id="register">Registrar</button>
+        <div className='d-flex align-items-center' style={{ height: '100vh' }}>
+            <div className="container" id="container">
+                <div className="form-container sign-up">
+                    <form onSubmit={SignUpEmailPassword}>
+                        <h1 style={{ color: '#512da8' }}>Criar Conta</h1>
+                        <div className="social-icons">
+                            <a href="#" className="icon"><i className="bi bi-google" style={{ color: '#512da8' }}></i></a>
+                            <a href="#" className="icon"><i className="bi bi-facebook" style={{ color: '#512da8' }}></i></a>
+                            <a href="#" className="icon"><i className="bi bi-github" style={{ color: '#512da8' }}></i></a>
+                            <a href="#" className="icon"><i className="bi bi-linkedin" style={{ color: '#512da8' }}></i></a>
+                        </div>
+                        <span>ou use seu email para registrar</span>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="password"
+                            placeholder="Senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <button type="submit">Registrar</button>
+                    </form>
+                </div>
+                <div className="form-container sign-in">
+                    <form onSubmit={SignInEmailPassword}>
+                        <h1 style={{ color: '#512da8' }}>Entrar</h1>
+                        <div className="social-icons">
+                            <a href="#" className="icon"><i className="bi bi-google" style={{ color: '#512da8' }}></i></a>
+                            <a href="#" className="icon"><i className="bi bi-facebook" style={{ color: '#512da8' }}></i></a>
+                            <a href="#" className="icon"><i className="bi bi-github" style={{ color: '#512da8' }}></i></a>
+                            <a href="#" className="icon"><i className="bi bi-linkedin" style={{ color: '#512da8' }}></i></a>
+                        </div>
+                        <span>ou use seu email e senha</span>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="password"
+                            placeholder="Senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <a href="#">Esqueceu sua senha?</a>
+                        <button type="submit">Entrar</button>
+                    </form>
+                </div>
+                <div className="toggle-container">
+                    <div className="toggle">
+                        <div className="toggle-panel toggle-left">
+                            <h1>Bem-vindo de volta!</h1>
+                            <p>Entre com seus dados pessoais para usar todas as funcionalidades do site</p>
+                            <button className="hidden" id="login">Entrar</button>
+                        </div>
+                        <div className="toggle-panel toggle-right">
+                            <h1>Olá, Amigo!</h1>
+                            <p>Registre-se com seus dados pessoais para usar todas as funcionalidades do site</p>
+                            <button className="hidden" id="register">Registrar</button>
+                        </div>
                     </div>
                 </div>
             </div>
