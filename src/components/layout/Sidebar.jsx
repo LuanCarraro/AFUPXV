@@ -1,26 +1,28 @@
 import React, { useContext } from 'react'
 import { AuthEmailPasswordContext } from '../../context/authEmailPassword';
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
 
-  const { user, handleSignOut } = useContext(AuthEmailPasswordContext);
+  const { handleSignOut } = useContext(AuthEmailPasswordContext);
+  const navigate = useNavigate();
 
   return (
     <div className="sidebar d-flex flex-column align-items-center justify-content-between h-100 py-3" style={{ width: '105px', backgroundColor: '#1F2225' }}>
       <div className="logo">
-        <img src="assets/img/logo.jpg" alt="logo" className="rounded-circle" width={60} height={60} />
+        <img src="/assets/img/logo.jpg" alt="logo" className="rounded-circle" width={60} height={60} />
       </div>
 
       <div className="pages d-flex flex-column align-items-center gap-3">
-        <a href="#inicio" className="nav-link text-center text-white text-decoration-none fs-2">
+        <div onClick={() => navigate("/")} className="nav-link text-center text-white text-decoration-none fs-2" style={{ cursor: 'pointer' }}>
           <i className="bi bi-house"></i>
           <p className="mb-0" style={{ fontSize: '12px' }}>Início</p>
-        </a>
+        </div>
 
-        <a href="#cursos" className="nav-link text-center text-white text-decoration-none fs-2">
+        <div onClick={() => navigate("/mysubjects")} className="nav-link text-center text-white text-decoration-none fs-2" style={{ cursor: 'pointer' }}>
           <i className="bi bi-book"></i>
-          <p className="mb-0" style={{ fontSize: '12px' }}>Cursos</p>
-        </a>
+          <p className="mb-0" style={{ fontSize: '12px' }}>Meus Cursos</p>
+        </div>
 
         <a href="#ranking" className="nav-link text-center text-white text-decoration-none fs-2">
           <i className="bi bi-trophy"></i>

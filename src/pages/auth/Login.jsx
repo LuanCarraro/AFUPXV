@@ -3,8 +3,9 @@ import { AuthEmailPasswordContext } from '../../context/authEmailPassword';
 import { Navigate } from 'react-router-dom';
 import '../../App.css';
 
-export default function AuthComponent() {
-    const { email, setEmail, password, setPassword, SignInEmailPassword, SignUpEmailPassword, Signed } = useContext(AuthEmailPasswordContext);
+export default function Login() {
+    const { email, setEmail, password, setPassword, firstName, setFirstName, lastName, setLastName,
+        SignInEmailPassword, SignUpEmailPassword, Signed } = useContext(AuthEmailPasswordContext);
 
     useEffect(() => {
         const container = document.getElementById('container');
@@ -28,6 +29,7 @@ export default function AuthComponent() {
         };
     }, []);
 
+    // Se o usuário estiver logado, redireciona automaticamente para "/"
     if (Signed) {
         return <Navigate to="/" />;
     }
@@ -45,6 +47,20 @@ export default function AuthComponent() {
                             <a href="#" className="icon"><i className="bi bi-linkedin" style={{ color: '#512da8' }}></i></a>
                         </div>
                         <span>ou use seu email para registrar</span>
+                        <input
+                            type="text"
+                            placeholder="Nome"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Sobrenome"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                        />
                         <input
                             type="email"
                             placeholder="Email"
@@ -100,7 +116,7 @@ export default function AuthComponent() {
                         <div className="toggle-panel toggle-right">
                             <h1>Olá, Amigo!</h1>
                             <p>Registre-se com seus dados pessoais para usar todas as funcionalidades do site</p>
-                            <button className="hidden" id="register">Registrar</button>
+                            <button className="hidden" id="register">Cadastrar</button>
                         </div>
                     </div>
                 </div>
