@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthEmailPasswordContext } from '../../context/authEmailPassword';
 import { Navigate } from 'react-router-dom';
 import '../../App.css';
@@ -6,8 +6,14 @@ import '../../App.css';
 export default function Login() {
     const { email, setEmail, password, setPassword, firstName, setFirstName, lastName, setLastName,
         SignInEmailPassword, SignUpEmailPassword, Signed } = useContext(AuthEmailPasswordContext);
+    const [mobileForm, setMobileForm] = useState('login'); // 'login' ou 'register'
+
+    // Detecta se é mobile
+    const isMobile = window.innerWidth <= 900;
 
     useEffect(() => {
+        if (isMobile) return; // Não aplica animação no mobile
+
         const container = document.getElementById('container');
         const registerBtn = document.getElementById('register');
         const loginBtn = document.getElementById('login');
@@ -27,7 +33,7 @@ export default function Login() {
             if (registerBtn) registerBtn.removeEventListener('click', handleRegisterClick);
             if (loginBtn) loginBtn.removeEventListener('click', handleLoginClick);
         };
-    }, []);
+    }, [isMobile]);
 
     // Se o usuário estiver logado, redireciona automaticamente para "/"
     if (Signed) {
@@ -37,89 +43,169 @@ export default function Login() {
     return (
         <div className='d-flex align-items-center' style={{ height: '100vh' }}>
             <div className="container" id="container">
-                <div className="form-container sign-up">
-                    <form onSubmit={SignUpEmailPassword}>
-                        <h1 style={{ color: '#512da8' }}>Criar Conta</h1>
-                        <div className="social-icons">
-                            <a href="#" className="icon"><i className="bi bi-google" style={{ color: '#512da8' }}></i></a>
-                            <a href="#" className="icon"><i className="bi bi-facebook" style={{ color: '#512da8' }}></i></a>
-                            <a href="#" className="icon"><i className="bi bi-github" style={{ color: '#512da8' }}></i></a>
-                            <a href="#" className="icon"><i className="bi bi-linkedin" style={{ color: '#512da8' }}></i></a>
+                {isMobile ? (
+                    <>
+                        {mobileForm === 'register' ? (
+                            <div className="form-container sign-up" style={{ position: 'static', width: '100%' }}>
+                                <form onSubmit={SignUpEmailPassword}>
+                                    <h1 style={{ color: '#512da8' }}>Criar Conta</h1>
+                                    <input
+                                        type="text"
+                                        placeholder="Nome"
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Sobrenome"
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="email"
+                                        placeholder="Email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="password"
+                                        placeholder="Senha"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                    <button type="submit">Registrar</button>
+                                    <button
+                                        type="button"
+                                        className="toggle-mobile-btn"
+                                        onClick={() => setMobileForm('login')}
+                                        style={{ marginTop: 10, background: 'transparent', color: '#512da8', border: 'none' }}
+                                    >
+                                        Já tem conta? Entrar
+                                    </button>
+                                </form>
+                            </div>
+                        ) : (
+                            <div className="form-container sign-in" style={{ position: 'static', width: '100%' }}>
+                                <form onSubmit={SignInEmailPassword}>
+                                    <h1 style={{ color: '#512da8' }}>Entrar</h1>
+                                    <input
+                                        type="email"
+                                        placeholder="Email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                    <input
+                                        type="password"
+                                        placeholder="Senha"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                    <button type="submit">Entrar</button>
+                                    <button
+                                        type="button"
+                                        className="toggle-mobile-btn"
+                                        onClick={() => setMobileForm('register')}
+                                        style={{ marginTop: 10, background: 'transparent', color: '#512da8', border: 'none' }}
+                                    >
+                                        Não tem conta? Registrar
+                                    </button>
+                                </form>
+                            </div>
+                        )}
+                    </>
+                ) : (
+                    <>
+                        <div className="form-container sign-up">
+                            <form onSubmit={SignUpEmailPassword}>
+                                <h1 style={{ color: '#512da8' }}>Criar Conta</h1>
+                                <div className="social-icons">
+                                    <a href="#" className="icon"><i className="bi bi-google" style={{ color: '#512da8' }}></i></a>
+                                    <a href="#" className="icon"><i className="bi bi-facebook" style={{ color: '#512da8' }}></i></a>
+                                    <a href="#" className="icon"><i className="bi bi-github" style={{ color: '#512da8' }}></i></a>
+                                    <a href="#" className="icon"><i className="bi bi-linkedin" style={{ color: '#512da8' }}></i></a>
+                                </div>
+                                <span>ou use seu email para registrar</span>
+                                <input
+                                    type="text"
+                                    placeholder="Nome"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Sobrenome"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    required
+                                />
+                                <input
+                                    type="email"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Senha"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <button type="submit">Registrar</button>
+                            </form>
                         </div>
-                        <span>ou use seu email para registrar</span>
-                        <input
-                            type="text"
-                            placeholder="Nome"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                            required
-                        />
-                        <input
-                            type="text"
-                            placeholder="Sobrenome"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                            required
-                        />
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                        <input
-                            type="password"
-                            placeholder="Senha"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        <button type="submit">Registrar</button>
-                    </form>
-                </div>
-                <div className="form-container sign-in">
-                    <form onSubmit={SignInEmailPassword}>
-                        <h1 style={{ color: '#512da8' }}>Entrar</h1>
-                        <div className="social-icons">
-                            <a href="#" className="icon"><i className="bi bi-google" style={{ color: '#512da8' }}></i></a>
-                            <a href="#" className="icon"><i className="bi bi-facebook" style={{ color: '#512da8' }}></i></a>
-                            <a href="#" className="icon"><i className="bi bi-github" style={{ color: '#512da8' }}></i></a>
-                            <a href="#" className="icon"><i className="bi bi-linkedin" style={{ color: '#512da8' }}></i></a>
+                        <div className="form-container sign-in">
+                            <form onSubmit={SignInEmailPassword}>
+                                <h1 style={{ color: '#512da8' }}>Entrar</h1>
+                                <div className="social-icons">
+                                    <a href="#" className="icon"><i className="bi bi-google" style={{ color: '#512da8' }}></i></a>
+                                    <a href="#" className="icon"><i className="bi bi-facebook" style={{ color: '#512da8' }}></i></a>
+                                    <a href="#" className="icon"><i className="bi bi-github" style={{ color: '#512da8' }}></i></a>
+                                    <a href="#" className="icon"><i className="bi bi-linkedin" style={{ color: '#512da8' }}></i></a>
+                                </div>
+                                <span>ou use seu email e senha</span>
+                                <input
+                                    type="email"
+                                    placeholder="Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Senha"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <a href="#">Esqueceu sua senha?</a>
+                                <button type="submit">Entrar</button>
+                            </form>
                         </div>
-                        <span>ou use seu email e senha</span>
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                        <input
-                            type="password"
-                            placeholder="Senha"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        <a href="#">Esqueceu sua senha?</a>
-                        <button type="submit">Entrar</button>
-                    </form>
-                </div>
-                <div className="toggle-container">
-                    <div className="toggle">
-                        <div className="toggle-panel toggle-left">
-                            <h1>Bem-vindo de volta!</h1>
-                            <p>Entre com seus dados pessoais para usar todas as funcionalidades do site</p>
-                            <button className="hidden" id="login">Entrar</button>
+                        <div className="toggle-container">
+                            <div className="toggle">
+                                <div className="toggle-panel toggle-left">
+                                    <h1>Bem-vindo de volta!</h1>
+                                    <p>Entre com seus dados pessoais para usar todas as funcionalidades do site</p>
+                                    <button className="hidden" id="login">Entrar</button>
+                                </div>
+                                <div className="toggle-panel toggle-right">
+                                    <h1>Olá, Amigo!</h1>
+                                    <p>Registre-se com seus dados pessoais para usar todas as funcionalidades do site</p>
+                                    <button className="hidden" id="register">Cadastrar</button>
+                                </div>
+                            </div>
                         </div>
-                        <div className="toggle-panel toggle-right">
-                            <h1>Olá, Amigo!</h1>
-                            <p>Registre-se com seus dados pessoais para usar todas as funcionalidades do site</p>
-                            <button className="hidden" id="register">Cadastrar</button>
-                        </div>
-                    </div>
-                </div>
+                    </>
+                )}
             </div>
         </div>
     );
