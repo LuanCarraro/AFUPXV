@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Sidebar from './layout/sidebar';
+import Sidebar from './layout/Sidebar';
 import { getProgressoCursos, emitirCertificado } from '../utils/localProgresso';
 import { useNavigate } from 'react-router-dom';
 import { getFirestore, doc, getDoc, updateDoc, increment } from 'firebase/firestore';
