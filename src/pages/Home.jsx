@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Sidebar from '../components/layout/sidebar';
+import Sidebar from '../components/layout/Sidebar';
 import { AuthEmailPasswordContext } from '../context/authEmailPassword';
 import Subjects from '../components/Subjects';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
