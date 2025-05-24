@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { getFirestore, collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import { app } from "../services/firebaseConfig";
 import { AuthEmailPasswordContext } from "../context/authEmailPassword";
-import Sidebar from "./layout/sidebar";
+import Sidebar from "./layout/Sidebar";
 
 
 export const Social = () => {
