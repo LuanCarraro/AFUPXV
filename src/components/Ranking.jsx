@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { app } from "../services/firebaseConfig";
 import { AuthEmailPasswordContext } from "../context/authEmailPassword";
-import Sidebar from "./layout/sidebar";
+import Sidebar from "./layout/Sidebar";
 
 export const Ranking = () => {
   try {
