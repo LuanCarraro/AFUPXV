@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { AuthEmailPasswordContext } from '../context/authEmailPassword';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { app } from '../services/firebaseConfig';
-import Sidebar from './layout/sidebar';
+import Sidebar from './layout/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
 export const MySubjects = () => {
