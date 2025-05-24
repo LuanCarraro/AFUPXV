@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { app } from '../services/firebaseConfig';
-import Sidebar from './layout/sidebar';
+import Sidebar from './layout/Sidebar';
 import { registrarAulaAssistida } from '../utils/localProgresso';
 
 export const Course = () => {
