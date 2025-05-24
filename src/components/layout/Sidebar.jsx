@@ -3,14 +3,12 @@ import { AuthEmailPasswordContext } from '../../context/authEmailPassword';
 import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
-
   const { handleSignOut } = useContext(AuthEmailPasswordContext);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      {/* Botão hamburguer só no mobile */}
       <button
         className="sidebar-hamburger"
         onClick={() => setOpen(true)}
@@ -23,18 +21,14 @@ function Sidebar() {
           border: 'none',
           fontSize: 32,
           color: '#fff',
-          display: 'none' // Esconde por padrão, mostra no CSS do mobile
+          display: 'none'
         }}
         aria-label="Abrir menu"
       >
         <i className="bi bi-list"></i>
       </button>
 
-      {/* Sidebar: só aparece no desktop OU se open=true no mobile */}
-      <div
-        className={`sidebar d-flex flex-column align-items-center justify-content-between h-100 py-3${open ? ' sidebar-open' : ''}`}
-      >
-        {/* Botão fechar só no mobile */}
+      <div className={`sidebar d-flex flex-column align-items-center justify-content-between h-100 py-3${open ? ' sidebar-open' : ''}`}>
         <button
           className="sidebar-close"
           onClick={() => setOpen(false)}
@@ -46,7 +40,7 @@ function Sidebar() {
             border: 'none',
             fontSize: 28,
             color: '#fff',
-            display: 'none' // Esconde por padrão, mostra no CSS do mobile
+            display: 'none'
           }}
           aria-label="Fechar menu"
         >
@@ -58,34 +52,33 @@ function Sidebar() {
         </div>
 
         <div className="pages d-flex flex-column align-items-center gap-3">
-          <div onClick={() => navigate("/")} className="nav-link text-center text-white text-decoration-none fs-2" style={{ cursor: 'pointer' }}>
-            <i className="bi bi-house"></i>
-            <p className="mb-0" style={{ fontSize: '12px' }}>Início</p>
-          </div>
+  <div onClick={() => navigate("/")} className="nav-link text-center text-white text-decoration-none fs-2" style={{ cursor: 'pointer' }}>
+    <i className="bi bi-house"></i>
+    <p className="mb-0" style={{ fontSize: '12px' }}>Início</p>
+  </div>
 
-          <div onClick={() => navigate("/mysubjects")} className="nav-link text-center text-white text-decoration-none fs-2" style={{ cursor: 'pointer' }}>
-            <i className="bi bi-book"></i>
-            <p className="mb-0" style={{ fontSize: '12px' }}>Meus Cursos</p>
-          </div>
+  <div onClick={() => navigate("/mysubjects")} className="nav-link text-center text-white text-decoration-none fs-2" style={{ cursor: 'pointer' }}>
+    <i className="bi bi-book"></i>
+    <p className="mb-0" style={{ fontSize: '12px' }}>Meus Cursos</p>
+  </div>
 
-          <a href="#ranking" className="nav-link text-center text-white text-decoration-none fs-2">
-            <i className="bi bi-trophy"></i>
-            <p className="mb-0" style={{ fontSize: '12px' }}>Ranking</p>
-          </a>
+  <div onClick={() => navigate("/certificados")} className="nav-link text-center text-white text-decoration-none fs-2" style={{ cursor: 'pointer' }}>
+    <i className="bi bi-award"></i>
+    <p className="mb-0" style={{ fontSize: '12px' }}>Certificados</p>
+  </div>
 
-          <a href="#certificados" className="nav-link text-center text-white text-decoration-none fs-2">
-            <i className="bi bi-award"></i>
-            <p className="mb-0" style={{ fontSize: '12px' }}>Certificados</p>
-          </a>
+  <div onClick={() => navigate("/ranking")} className="nav-link text-center text-white text-decoration-none fs-2" style={{ cursor: 'pointer' }}>
+    <i className="bi bi-trophy"></i>
+    <p className="mb-0" style={{ fontSize: '12px' }}>Ranking</p>
+  </div>
 
-          <a href="#social" className="nav-link text-center text-white text-decoration-none fs-2">
-            <i className="bi bi-people"></i>
-            <p className="mb-0" style={{ fontSize: '12px' }}>Social</p>
-          </a>
-        </div>
+  <div onClick={() => navigate("/social")} className="nav-link text-center text-white text-decoration-none fs-2" style={{ cursor: 'pointer' }}>
+    <i className="bi bi-people"></i>
+    <p className="mb-0" style={{ fontSize: '12px' }}>Social</p>
+  </div>
+</div>
 
         <div className="info d-flex flex-column gap-2">
-
           <i className="bi bi-bell-fill" style={{ color: 'white', fontSize: '30px' }}></i>
           <i className="bi bi-gear" style={{ color: 'white', fontSize: '30px' }}></i>
 
@@ -105,7 +98,6 @@ function Sidebar() {
               </li>
             </ul>
           </div>
-
         </div>
       </div>
     </>
@@ -113,3 +105,4 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
