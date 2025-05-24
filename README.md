@@ -1,8 +1,8 @@
-# React + Vite
+Para rodar este projeto, deve-se instalar o vite nas dependendias do projeto. para isto, basta acessar a pasta do projeto a partir do command prompt e utilizar o comando npm install.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Depois disso deve-se rodar o comando npm run build.
 
-Currently, two official plugins are available:
+na Sequencia npx cap sync android
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+E, finalmente, npx cap open android
+
